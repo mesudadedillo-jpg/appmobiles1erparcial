@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Refugio de mascotas en adopción: perros, gatos, conejos, aves, roedores y reptiles. Conoce sus fichas y adopta.">
+  <meta name="theme-color" content="#0a0f1d">
+  <title>Patitas | Mascotas en adopción</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🐾%3C/text%3E%3C/svg%3E">
+  
+  <!-- Precarga LCP  -->
+<!-- Bulma cargado  -->
+  <link rel="preload" href="css/bulma.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/bulma.min.css"></noscript>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/bulma.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Scripts -->
+  <script src="js/datos.js" defer></script>
+  <script src="js/funciones.js" defer></script>
+</head>
+<body>
+
+<header class="cyber-header">
+  <nav class="navbar is-spaced" aria-label="Principal">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item brand" href="#inicio">🐾 Patitas<span class="neon-dot">.</span>adopt</a>
+        <button class="navbar-burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+          <span></span><span></span><span></span><span></span>
+        </button>
+      </div>
+      <div id="menu" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item" href="#olvidados">Los olvidados</a>
+          <a class="navbar-item" href="#catalogo">Catálogo</a>
+          <a class="navbar-item" href="#seguimiento">Seguimiento <span id="navAdop" class="tag is-info is-light ml-2">0</span></a>
+          <div class="navbar-item">Vistas:&nbsp;<span id="total" class="tag is-info">0</span></div>
+          <div class="navbar-item"><button id="reset" class="button is-small is-dark is-outlined">Reiniciar</button></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main id="inicio">
+  <!-- Portada -->
+  <section class="hero is-medium cyber-hero">
+    <div class="hero-body"><div class="container has-text-centered">
+      <h1 class="title is-1 text-glow">Alguien te está esperando.</h1>
+      <p class="subtitle is-4 mt-3"><span id="disponibles">60</span> entidades biológicas buscan un hogar. Conéctate con ellas.</p>
+    </div></div>
+  </section>
+
+  <!-- Carrusel Dinámico -->
+  <section id="olvidados" class="section cyber-section-dark" aria-labelledby="tOlvidados">
+    <div class="container">
+      <div class="is-flex justify-content-space-between align-items-center mb-4 flex-wrap">
+        <div>
+          <h2 id="tOlvidados" class="title is-3 text-white mb-1">Prioridad de Adopción ⚡</h2>
+          <p class="subtitle is-6 text-gray">Los perfiles con menor índice de visualización</p>
+        </div>
+        <div class="carrusel-controles mt-2">
+          <span id="carIndicador" class="tag is-dark mr-3" aria-live="polite">0 de 0</span>
+          <div class="buttons are-small has-addons d-inline-flex">
+            <button id="carPrev" class="button is-info is-outlined" aria-label="Anteriores">‹</button>
+            <button id="carNext" class="button is-info is-outlined" aria-label="Siguientes">›</button>
+          </div>
+        </div>
+      </div>
+      <div class="carrusel" role="region" aria-roledescription="carrusel" aria-label="Mascotas con menos vistas">
+        <div id="olvidadosGrid" class="pista" role="group" aria-label="Lista de mascotas" tabindex="0"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catálogo -->
+  <section id="catalogo" class="section" aria-labelledby="tCatalogo">
+    <div class="container">
+      <h2 id="tCatalogo" class="title is-3 mb-5">Catálogo Central</h2>
+      <div class="tabs is-boxed is-medium cyber-tabs"><ul id="tabs"></ul></div>
+      <div class="field mb-5">
+        <label class="label is-sr-only" for="buscar">Buscar mascota</label>
+        <div class="control"><input id="buscar" class="input is-medium cyber-input" type="search" placeholder="Filtrar por nombre o raza..." autocomplete="off"></div>
+      </div>
+      <div class="is-flex is-flex-wrap-wrap is-align-items-center is-justify-content-space-between mb-5">
+        <label class="checkbox cyber-check"><input type="checkbox" id="verAdoptadas"> Mostrar unidades ya adoptadas</label>
+        <button id="btnAgregar" class="button is-info is-light">＋ Registrar mascota</button>
+      </div>
+      <div id="grid" class="columns is-multiline"></div>
+      <p id="vacio" class="notification is-dark is-hidden">Sin coincidencias en la red. Intenta otro parámetro.</p>
+      <div class="has-text-centered mt-5"><button id="btnMas" class="button is-info is-medium is-hidden">Cargar más registros</button></div>
+    </div>
+  </section>
+
+  <!-- Seguimiento -->
+  <section id="seguimiento" class="section cyber-section-light" aria-labelledby="tSeg">
+    <div class="container">
+      <h2 id="tSeg" class="title is-3 mb-4">Seguimiento de Adopción</h2>
+      <p id="segVacio" class="notification is-dark is-light">Sin procesos activos. Inicia una vinculación desde el catálogo.</p>
+      <div id="segLista"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer cyber-footer">
+  <p class="has-text-centered">Sistema simulado de adopción autónoma · Edición Futurista.</p>
+</footer>
+
+<!-- Modales -->
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitulo">
+  <div class="modal-background"></div>
+  <div class="modal-card cyber-modal">
+    <header class="modal-card-head">
+      <h2 id="mTitulo" class="modal-card-title"></h2>
+      <button class="delete" aria-label="Cerrar ficha"></button>
+    </header>
+    <section class="modal-card-body">
+      <figure class="image is-4by3"><img id="mImg" alt="" width="400" height="300" decoding="async"></figure>
+      <div id="mTags" class="tags mt-4"></div>
+      <p id="mDesc" class="mb-4"></p>
+      <p class="is-size-7 text-uppercase font-weight-bold">Índice de Energía</p>
+      <progress id="mEnergia" class="progress is-info" max="5" aria-label="Nivel de energía"></progress>
+      <p class="is-size-7 mt-3">Registros de acceso: <strong id="mVistas"></strong></p>
+      <form id="formAdopcion" class="is-hidden mt-5">
+        <div class="field">
+          <label class="label" for="adNombre">Nombre del adoptante</label>
+          <div class="control"><input id="adNombre" class="input cyber-input" required minlength="3" autocomplete="name"></div>
+        </div>
+        <div class="field">
+          <label class="label" for="adCorreo">Correo de contacto</label>
+          <div class="control"><input id="adCorreo" class="input cyber-input" type="email" required autocomplete="email"></div>
+        </div>
+        <button type="submit" class="button is-success is-fullwidth mt-4">Autorizar Adopción</button>
+      </form>
+    </section>
+    <footer class="modal-card-foot">
+      <button id="btnAdoptar" class="button is-info">Iniciar Adopción</button>
+      <button id="btnQuitar" class="button is-danger is-light is-hidden">Eliminar registro</button>
+      <button class="button cerrar">Cerrar</button>
+    </footer>
+  </div>
+</div>
+
+<div id="modalAgregar" class="modal" role="dialog" aria-modal="true" aria-labelledby="agTitulo">
+  <div class="modal-background"></div>
+  <div class="modal-card cyber-modal">
+    <header class="modal-card-head">
+      <h2 id="agTitulo" class="modal-card-title">Nuevo Registro Biológico</h2>
+      <button class="delete" aria-label="Cerrar formulario"></button>
+    </header>
+    <section class="modal-card-body">
+      <form id="formAgregar">
+        <div class="field">
+          <label class="label" for="agCat">Clasificación</label>
+          <div class="control"><div class="select is-fullwidth"><select id="agCat" required></select></div></div>
+        </div>
+        <div class="field">
+          <p class="label">Archivo vectorial SVG (máx. 200 KB)</p>
+          <div class="file has-name is-fullwidth">
+            <label class="file-label">
+              <input class="file-input" type="file" id="agArchivo" accept=".svg,image/svg+xml" required>
+              <span class="file-cta"><span class="file-label">Seleccionar...</span></span>
+              <span class="file-name" id="agNombreArchivo">Ningún archivo</span>
+            </label>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="agNombre">Identificador / Nombre (opcional)</label>
+          <div class="control"><input id="agNombre" class="input cyber-input" maxlength="30" autocomplete="off" placeholder="Ej. Alfa-01"></div>
+        </div>
+        <div class="field">
+          <label class="label" for="agRaza">Variedad / Raza (opcional)</label>
+          <div class="control"><input id="agRaza" class="input cyber-input" maxlength="40" autocomplete="off"></div>
+        </div>
+        <p id="agError" class="notification is-danger is-light is-hidden" role="alert"></p>
+      </form>
+    </section>
+    <footer class="modal-card-foot">
+      <button type="submit" form="formAgregar" class="button is-info">Registrar en red</button>
+      <button class="button cerrar">Cancelar</button>
+    </footer>
+  </div>
+</div>
+
+<div id="toast" class="notification is-info is-hidden" role="status" aria-live="polite"></div>
+</body>
+</html>

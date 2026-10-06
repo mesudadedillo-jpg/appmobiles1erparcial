@@ -1,0 +1,113 @@
+/* style.css — Tema Futurista / Cyber-Clean (Optimizado para Lighthouse 100) */
+
+:root {
+  --bg-core: #070913;
+  --bg-surface: #0f1629;
+  --bg-card: #151d36;
+  --neon-blue: #00f0ff;
+  --neon-glow: rgba(0, 240, 255, 0.25);
+  --text-main: #f0f4f8;
+  --text-muted: #94a3b8;
+  --border-cyber: #1e293b;
+}
+
+body {
+  background: var(--bg-core);
+  color: var(--text-main);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Tipografía y Textos */
+.title, .subtitle { color: var(--text-main); }
+.text-glow { text-shadow: 0 0 20px var(--neon-glow); }
+.text-gray { color: var(--text-muted); }
+.neon-dot { color: var(--neon-blue); }
+
+/* Navegación */
+.cyber-header { background: var(--bg-surface); border-bottom: 1px solid var(--border-cyber); }
+.navbar, .navbar-menu { background: transparent !important; }
+.navbar .navbar-item, .navbar-burger { color: var(--text-main) !important; }
+.navbar a.navbar-item:hover { color: var(--neon-blue) !important; background: rgba(0,240,255,0.05) !important; }
+.brand { font-family: monospace; font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
+
+/* Hero */
+.cyber-hero {
+  background: radial-gradient(circle at center, #132247 0%, var(--bg-core) 70%);
+  border-bottom: 1px solid var(--border-cyber);
+}
+
+/* Secciones */
+.cyber-section-dark { background: var(--bg-surface); border-top: 1px solid var(--border-cyber); border-bottom: 1px solid var(--border-cyber); }
+.cyber-footer { background: var(--bg-surface); color: var(--text-muted); border-top: 1px solid var(--border-cyber); }
+
+/* Tarjetas */
+.card {
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--border-cyber);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px var(--neon-glow);
+  border-color: rgba(0, 240, 255, 0.4);
+}
+.card.destacada { border: 2px dashed var(--neon-blue); }
+.card-image { position: relative; background: #000; }
+.vistas { position: absolute; top: .6rem; right: .6rem; background: rgba(15,22,41,0.85) !important; color: var(--neon-blue) !important; backdrop-filter: blur(4px); }
+.card.adoptada img { filter: grayscale(1) opacity(0.5); }
+
+/* Pestañas (Tabs) */
+.cyber-tabs ul { border-bottom-color: var(--border-cyber) !important; }
+.cyber-tabs li a { color: var(--text-muted); border-bottom-color: transparent; }
+.cyber-tabs li.is-active a { color: var(--neon-blue) !important; border-bottom-color: var(--neon-blue) !important; background: transparent; font-weight: 700; }
+
+/* Inputs y Controles */
+.cyber-input { background: var(--bg-surface) !important; border-color: var(--border-cyber) !important; color: var(--text-main) !important; }
+.cyber-input:focus { border-color: var(--neon-blue) !important; box-shadow: 0 0 10px var(--neon-glow) !important; }
+.cyber-check { color: var(--text-muted); }
+
+/* Carrusel Dinámico fluido */
+.carrusel { width: 100%; overflow: hidden; }
+.pista {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: .5rem 0 1rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-cyber) transparent;
+}
+.pista::-webkit-scrollbar { height: 6px; }
+.pista::-webkit-scrollbar-thumb { background: var(--border-cyber); border-radius: 3px; }
+.slide { flex: 0 0 85%; scroll-snap-align: start; }
+@media (min-width: 769px) { .slide { flex-basis: calc((100% - 2.5rem) / 3); } }
+
+/* Modales */
+.cyber-modal .modal-card-head, .cyber-modal .modal-card-foot {
+  background: var(--bg-surface);
+  border-color: var(--border-cyber);
+  color: var(--text-main);
+}
+.cyber-modal .modal-card-body {
+  background: var(--bg-card);
+  color: var(--text-main);
+}
+
+/* Notificaciones y Cajas */
+.box { background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-cyber); border-left: 5px solid var(--neon-blue); }
+#toast { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50; max-width: 90vw; background: var(--bg-surface) !important; border: 1px solid var(--neon-blue); color: var(--text-main) !important; }
+
+/* Reserva de espacio antibrincos (CLS = 0) */
+.carrusel-controles { min-height: 2rem; }
+.pista { min-height: 31rem; }
+.tabs { min-height: 3.5rem; }
+#grid { min-height: 31rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+  .pista { scroll-behavior: auto; }
+}
